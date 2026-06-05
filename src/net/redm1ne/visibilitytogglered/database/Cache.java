@@ -1,4 +1,4 @@
-package dev.cleusgamer201.visibilitytoggle.database;
+package net.redm1ne.visibilitytogglered.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import dev.cleusgamer201.visibilitytoggle.Main;
-import dev.cleusgamer201.visibilitytoggle.Utils;
-import dev.cleusgamer201.visibilitytoggle.api.Visibility;
+import net.redm1ne.visibilitytogglered.Main;
+import net.redm1ne.visibilitytogglered.Utils;
+import net.redm1ne.visibilitytogglered.api.Visibility;
 
 public class Cache {
 
@@ -45,7 +45,7 @@ public class Cache {
         return player;
     }
 
-    public void setVisbility(Visibility value) {
+    public void setVisibility(Visibility value) {
         this.state = value;
     }
 

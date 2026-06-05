@@ -1,12 +1,12 @@
-package dev.cleusgamer201.visibilitytoggle;
+package net.redm1ne.visibilitytogglered;
 
-import dev.cleusgamer201.visibilitytoggle.api.PlayerVisibilityChangedEvent;
-import dev.cleusgamer201.visibilitytoggle.api.PlayerVisibilityUpdatedEvent;
-import dev.cleusgamer201.visibilitytoggle.api.Visibility;
-import dev.cleusgamer201.visibilitytoggle.database.Cache;
-import dev.cleusgamer201.visibilitytoggle.database.CacheLoadEvent;
-import dev.cleusgamer201.visibilitytoggle.database.DBManager;
-import dev.cleusgamer201.visibilitytoggle.utils.*;
+import net.redm1ne.visibilitytogglered.api.PlayerVisibilityChangedEvent;
+import net.redm1ne.visibilitytogglered.api.PlayerVisibilityUpdatedEvent;
+import net.redm1ne.visibilitytogglered.api.Visibility;
+import net.redm1ne.visibilitytogglered.database.Cache;
+import net.redm1ne.visibilitytogglered.database.CacheLoadEvent;
+import net.redm1ne.visibilitytogglered.database.DBManager;
+import net.redm1ne.visibilitytogglered.utils.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -104,14 +104,14 @@ public class Main extends JavaPlugin implements Listener {
     }
 
     private ItemBuilder buildItem(String s) {
-        return new ItemBuilder(config.getString("Items." + s + ".Item")).setName(config.getString("Items." + s + ".Name")).setLore(config.getStringList("Items." + s + ".Lore"));
+        return new ItemBuilder(config.getString("Items." + s + ".Item"))
+                .setName(config.getString("Items." + s + ".Name"))
+                .setLore(config.getStringList("Items." + s + ".Lore"));
     }
-
 
     public Config getConfig() {
         return config;
     }
-
 
     public DBManager getDbManager() {
         return dbManager;
@@ -219,16 +219,6 @@ public class Main extends JavaPlugin implements Listener {
         }
     }
 
-    /*@EventHandler
-    public void onSwapHand(PlayerSwapHandItemsEvent e) {
-        ItemStack offHand = e.getOffHandItem(), mainHand = e.getMainHandItem();
-        if (offHand != null && offHand.hasItemMeta() && (offHand.isSimilar(onItem) || offHand.isSimilar(rankItem) || offHand.isSimilar(offItem))) {
-            e.setCancelled(true);
-        } else if (mainHand != null && mainHand.hasItemMeta() && (mainHand.isSimilar(onItem) || mainHand.isSimilar(rankItem) || mainHand.isSimilar(offItem))) {
-            e.setCancelled(true);
-        }
-    }*/
-
     public void showHide(Player p, Player a) {
         showHide(dbManager.getCache(p).getVisibility(), p, a);
     }
@@ -242,46 +232,46 @@ public class Main extends JavaPlugin implements Listener {
         switch (visibility) {
             case SHOW_ALL:
                 if (!p.canSee(a)) {
-                    p.showPlayer(a);
+                    p.showPlayer(this, a);
                 }
                 break;
             case RANK_ONLY:
                 if (a.hasPermission("visibilitytoggle.rank")) {
                     if (!p.canSee(a)) {
-                        p.showPlayer(a);
+                        p.showPlayer(this, a);
                     }
                     break;
                 }
                 if (p.canSee(a)) {
-                    p.hidePlayer(a);
+                    p.hidePlayer(this, a);
                 }
                 break;
             case HIDE_ALL:
                 if (p.canSee(a)) {
-                    p.hidePlayer(a);
+                    p.hidePlayer(this, a);
                 }
                 break;
         }
         switch (ca.getVisibility()) {
             case SHOW_ALL:
                 if (!a.canSee(p)) {
-                    a.showPlayer(p);
+                    a.showPlayer(this, p);
                 }
                 break;
             case RANK_ONLY:
                 if (p.hasPermission("visibilitytoggle.rank")) {
                     if (!a.canSee(p)) {
-                        a.showPlayer(p);
+                        a.showPlayer(this, p);
                     }
                     break;
                 }
                 if (a.canSee(p)) {
-                    a.hidePlayer(p);
+                    a.hidePlayer(this, p);
                 }
                 break;
             case HIDE_ALL:
                 if (a.canSee(p)) {
-                    a.hidePlayer(p);
+                    a.hidePlayer(this, p);
                 }
                 break;
         }
@@ -317,8 +307,8 @@ public class Main extends JavaPlugin implements Listener {
         } else {
             for (Player a : player.getWorld().getPlayers()) {
                 if (player != a && !player.canSee(a)) {
-                    player.showPlayer(a);
-                    a.showPlayer(player);
+                    player.showPlayer(this, a);
+                    a.showPlayer(this, player);
                 }
             }
             Bukkit.getScheduler().runTask(this, () -> Bukkit.getPluginManager().callEvent(new PlayerVisibilityUpdatedEvent(player, Visibility.SHOW_ALL)));
@@ -375,22 +365,19 @@ public class Main extends JavaPlugin implements Listener {
         if (showToggleTitles) {
             switch (newVisibility) {
                 case SHOW_ALL:
-                    TitleAPI.sendTitle(player, toggleShowTitle);
-                    TitleAPI.sendSubTitle(player, toggleShowSubtitle);
+                    player.sendTitle(toggleShowTitle, toggleShowSubtitle, 10, 70, 20);
                     break;
                 case RANK_ONLY:
-                    TitleAPI.sendTitle(player, toggleRankTitle);
-                    TitleAPI.sendSubTitle(player, toggleRankSubtitle);
+                    player.sendTitle(toggleRankTitle, toggleRankSubtitle, 10, 70, 20);
                     break;
                 case HIDE_ALL:
-                    TitleAPI.sendTitle(player, toggleOffTitle);
-                    TitleAPI.sendSubTitle(player, toggleOffSubtitle);
+                    player.sendTitle(toggleOffTitle, toggleOffSubtitle, 10, 70, 20);
                     break;
             }
         }
 
         Visibility oldVisibility = cache.getVisibility();
-        cache.setVisbility(newVisibility);
+        cache.setVisibility(newVisibility);
         cache.setLastUse(toggleDelay);
         updateVisibility(player);
         Bukkit.getScheduler().runTask(this, () -> Bukkit.getPluginManager().callEvent(new PlayerVisibilityChangedEvent(player, oldVisibility, newVisibility)));
@@ -427,16 +414,13 @@ public class Main extends JavaPlugin implements Listener {
         if (showToggleTitles) {
             switch (newVisibility) {
                 case SHOW_ALL:
-                    TitleAPI.sendTitle(player, toggleShowTitle);
-                    TitleAPI.sendSubTitle(player, toggleShowSubtitle);
+                    player.sendTitle(toggleShowTitle, toggleShowSubtitle, 10, 70, 20);
                     break;
                 case RANK_ONLY:
-                    TitleAPI.sendTitle(player, toggleRankTitle);
-                    TitleAPI.sendSubTitle(player, toggleRankSubtitle);
+                    player.sendTitle(toggleRankTitle, toggleRankSubtitle, 10, 70, 20);
                     break;
                 case HIDE_ALL:
-                    TitleAPI.sendTitle(player, toggleOffTitle);
-                    TitleAPI.sendSubTitle(player, toggleOffSubtitle);
+                    player.sendTitle(toggleOffTitle, toggleOffSubtitle, 10, 70, 20);
                     break;
             }
         }
@@ -444,7 +428,7 @@ public class Main extends JavaPlugin implements Listener {
         Cache cache = dbManager.getCache(player);
         Visibility oldVisibility = cache.getVisibility();
 
-        cache.setVisbility(newVisibility);
+        cache.setVisibility(newVisibility);
         cache.setLastUse(System.currentTimeMillis());
         updateVisibility(player);
         Bukkit.getScheduler().runTask(this, () -> Bukkit.getPluginManager().callEvent(new PlayerVisibilityChangedEvent(player, oldVisibility, newVisibility)));

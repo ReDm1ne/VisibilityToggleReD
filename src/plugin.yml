@@ -1,6 +1,6 @@
 name: VisibilityToggle
-main: dev.cleusgamer201.visibilitytoggle.Main
-version: 3.9
+main: net.redm1ne.visibilitytogglered.Main
+version: 4.0
 api-version: 1.16
 author: CleusGamer201
 commands:

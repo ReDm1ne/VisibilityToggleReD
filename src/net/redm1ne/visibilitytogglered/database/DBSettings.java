@@ -1,10 +1,10 @@
-package dev.cleusgamer201.visibilitytoggle.database;
+package net.redm1ne.visibilitytogglered.database;
 
 public class DBSettings {
 
     enum DBType {
 
-        MYSQL("com.mysql.jdbc.Driver"), SQLITE("org.sqlite.JDBC");
+        MYSQL("com.mysql.cj.jdbc.Driver"), SQLITE("org.sqlite.JDBC");
 
         private final String driver;
 
@@ -64,7 +64,6 @@ public class DBSettings {
             settings.port = port;
             return this;
         }
-
 
         public Builder user(String user) {
             settings.user = user;

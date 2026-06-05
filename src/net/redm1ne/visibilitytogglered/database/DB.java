@@ -1,4 +1,4 @@
-package dev.cleusgamer201.visibilitytoggle.database;
+package net.redm1ne.visibilitytogglered.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 import org.bukkit.Bukkit;
 
-import dev.cleusgamer201.visibilitytoggle.Main;
-import dev.cleusgamer201.visibilitytoggle.Utils;
-import dev.cleusgamer201.visibilitytoggle.database.DBSettings.DBType;
+import net.redm1ne.visibilitytogglered.Main;
+import net.redm1ne.visibilitytogglered.Utils;
+import net.redm1ne.visibilitytogglered.database.DBSettings.DBType;
 
 public class DB {
 
@@ -27,7 +27,7 @@ public class DB {
             DBType type = settings.type();
             if (type == DBType.MYSQL) {
                 Class.forName(type.getDriver());
-                con = DriverManager.getConnection("jdbc:mysql://" + settings.host() + ":" + settings.port() + "/" + settings.database() + "?autoReconnect=true", settings.user(), settings.password());
+                con = DriverManager.getConnection("jdbc:mysql://" + settings.host() + ":" + settings.port() + "/" + settings.database() + "?autoReconnect=true&useSSL=false", settings.user(), settings.password());
             } else {
                 Class.forName(type.getDriver());
                 con = DriverManager.getConnection("jdbc:sqlite:" + Main.getInstance().getDataFolder() + "/" + settings.database() + ".db");

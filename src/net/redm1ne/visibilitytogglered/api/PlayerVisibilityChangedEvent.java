@@ -1,4 +1,4 @@
-package dev.cleusgamer201.visibilitytoggle.api;
+package net.redm1ne.visibilitytogglered.api;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -31,6 +31,10 @@ public class PlayerVisibilityChangedEvent extends Event {
 
     @Override
     public HandlerList getHandlers() {
+        return handler;
+    }
+
+    public static HandlerList getHandlerList() {
         return handler;
     }
 }

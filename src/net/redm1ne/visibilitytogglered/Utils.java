@@ -1,4 +1,4 @@
-package dev.cleusgamer201.visibilitytoggle;
+package net.redm1ne.visibilitytogglered;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 public class Utils {
-	
+
 	public static String color(String Text) {
 		Text = Text.replaceAll("<1>", "✖");
         Text = Text.replaceAll("<2>", "✔");
@@ -27,7 +27,6 @@ public class Utils {
         Text = Text.replaceAll("<i>", "í");
         Text = Text.replaceAll("<o>", "ó");
         Text = Text.replaceAll("<u>", "ú");
-    	Text = Text.replaceAll("<u>", "ú");
     	Text = Text.replaceAll("<A>", "Á");
     	Text = Text.replaceAll("<E>", "É");
     	Text = Text.replaceAll("<I>", "Í");
@@ -35,7 +34,7 @@ public class Utils {
     	Text = Text.replaceAll("<U>", "Ú");
         return ChatColor.translateAlternateColorCodes('&', Text);
     }
-	
+
 	public static List<String> color(List<String> lines) {
 		for (int i = 0; i < lines.size(); i++) {
 			lines.set(i, color(lines.get(i)));
@@ -47,4 +46,3 @@ public class Utils {
         Bukkit.getConsoleSender().sendMessage(Main.getPrefix() + color(Text));
     }
 }
-

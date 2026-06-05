@@ -1,9 +1,9 @@
-package dev.cleusgamer201.visibilitytoggle.api;
+package net.redm1ne.visibilitytogglered.api;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
-import dev.cleusgamer201.visibilitytoggle.Main;
+import net.redm1ne.visibilitytogglered.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -31,7 +31,7 @@ public class VisibilityToggleAPI {
             int slot = plugin.getItemSlot();
             for (Player all : Bukkit.getOnlinePlayers()) {
                 ItemStack item = all.getInventory().getItem(slot);
-                if (item != null && (item.isSimilar(plugin.getOnItem()) || item.isSimilar(plugin.getRankItem())) || item.isSimilar(plugin.getOffItem())) {
+                if (item != null && (item.isSimilar(plugin.getOnItem()) || item.isSimilar(plugin.getRankItem()) || item.isSimilar(plugin.getOffItem()))) {
                     all.getInventory().clear(slot);
                 }
             }
@@ -61,11 +61,11 @@ public class VisibilityToggleAPI {
     }
 
     public void forceToggleVisibility(Player player) {
-        plugin.toggleVisibility(player);
+        plugin.forceToggleVisibility(player);
     }
 
     public void forceToggleVisibility(Player player, Visibility visibility) {
-        plugin.toggleVisibility(player, visibility);
+        plugin.forceToggleVisibility(player, visibility);
     }
 
     public Visibility getVisibilityOf(Player player) {

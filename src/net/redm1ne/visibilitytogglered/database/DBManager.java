@@ -1,4 +1,4 @@
-package dev.cleusgamer201.visibilitytoggle.database;
+package net.redm1ne.visibilitytogglered.database;
 
 import java.sql.ResultSet;
 import java.util.Collection;
@@ -17,9 +17,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import dev.cleusgamer201.visibilitytoggle.Main;
-import dev.cleusgamer201.visibilitytoggle.Utils;
-import dev.cleusgamer201.visibilitytoggle.utils.Config;
+import net.redm1ne.visibilitytogglered.Main;
+import net.redm1ne.visibilitytogglered.Utils;
+import net.redm1ne.visibilitytogglered.utils.Config;
 
 public class DBManager implements Listener {
 

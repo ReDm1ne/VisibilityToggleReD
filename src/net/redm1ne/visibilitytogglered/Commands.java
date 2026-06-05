@@ -1,7 +1,7 @@
-package dev.cleusgamer201.visibilitytoggle;
+package net.redm1ne.visibilitytogglered;
 
-import static dev.cleusgamer201.visibilitytoggle.Main.getPrefix;
-import static dev.cleusgamer201.visibilitytoggle.Utils.color;
+import static net.redm1ne.visibilitytogglered.Main.getPrefix;
+import static net.redm1ne.visibilitytogglered.Utils.color;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -10,35 +10,34 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-@SuppressWarnings("all")
 public class Commands implements CommandExecutor {
 
 	private final Main plugin;
 	public Commands(Main plugin) {
 		this.plugin = plugin;
 	}
-	
+
 	public boolean onCommand(CommandSender Sender, Command Cmd, String Label, String[] Args) {
 		if (!Sender.hasPermission("visibilitytoggle.admin")) {
 			Sender.sendMessage(getPrefix() + color("&cNo Permission!"));
 			return true;
 		}
-		
+
 		if (Args.length < 1) {
 			Help(Sender);
 			return true;
 		}
-		
+
 		if (Args[0].equalsIgnoreCase("Help")) {
 			Help(Sender);
 			return true;
         }
-		
+
 		if (Args[0].equalsIgnoreCase("Load")) {
 			if (Args.length > 1) {
 				try {
 					Player t = Bukkit.getPlayerExact(Args[1]);
-					if (t.isOnline()) {
+					if (t != null && t.isOnline()) {
 						plugin.updateVisibility(t);
 						Sender.sendMessage(getPrefix() + color("&7" + t.getName() + "&b Visibility &aLoaded!"));
 						return true;
@@ -52,12 +51,12 @@ public class Commands implements CommandExecutor {
 			}
 			return true;
         }
-		
+
 		if (Args[0].equalsIgnoreCase("Toggle")) {
 			if (Args.length > 1) {
 				try {
 					Player t = Bukkit.getPlayerExact(Args[1]);
-					if (t.isOnline()) {
+					if (t != null && t.isOnline()) {
 						plugin.toggleVisibility(t);
 						Sender.sendMessage(getPrefix() + color("&7" + t.getName() + "&b Visibility &aToggled!"));
 						return true;
@@ -71,16 +70,15 @@ public class Commands implements CommandExecutor {
 			}
 			return true;
         }
-		
+
 		if (Args[0].equalsIgnoreCase("Reload")) {
 			if (plugin.isToggleItem()) {
 				int slot = plugin.getItemSlot();
 				for (Player all : Bukkit.getOnlinePlayers()) {
 					ItemStack item = all.getInventory().getItem(slot);
-					if (item != null && (item.isSimilar(plugin.getOnItem()) || item.isSimilar(plugin.getRankItem())) || item.isSimilar(plugin.getOffItem())) {
+					if (item != null && (item.isSimilar(plugin.getOnItem()) || item.isSimilar(plugin.getRankItem()) || item.isSimilar(plugin.getOffItem()))) {
 		    			all.getInventory().clear(slot);
 		    		}
-					
 				}
 			}
 			plugin.getConfig().reload();
@@ -89,12 +87,12 @@ public class Commands implements CommandExecutor {
 			Sender.sendMessage(getPrefix() + color("&6Configuration reload and visibility refreshed for all players."));
 			return true;
         }
-        
+
         Sender.sendMessage(getPrefix() + color("&cArgument Invalid!"));
         Bukkit.dispatchCommand(Sender, "Vt");
         return true;
 	}
-	
+
 	public void Help(CommandSender Sender) {
 		Sender.sendMessage(color("&8&m-&f&m-&8&m-&f&m-&8&m-&f&m-&r &bVisibilityToggle &f&m-&8&m-&f&m-&8&m-&f&m-&8&m-&r"));
 		Sender.sendMessage("        ");
@@ -104,6 +102,4 @@ public class Commands implements CommandExecutor {
 		Sender.sendMessage("        ");
 		Sender.sendMessage(color("&8&m-&f&m-&8&m-&f&m-&8&m-&f&m-&r &bVisibilityToggle &f&m-&8&m-&f&m-&8&m-&f&m-&8&m-&r"));
 	}
-
-
 }

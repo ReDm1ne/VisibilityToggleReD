@@ -1,4 +1,4 @@
-package dev.cleusgamer201.visibilitytoggle.database;
+package net.redm1ne.visibilitytogglered.database;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -8,25 +8,25 @@ public class CacheUnloadEvent extends Event {
 
 	private final Cache cache;
 	private final Player player;
-	
+
 	public CacheUnloadEvent(final Cache cache, final Player player) {
 		this.cache = cache;
 		this.player = player;
 	}
-	
+
 	public Player getPlayer() {
 		return this.player;
 	}
-	
+
 	public Cache getCache() {
 		return this.cache;
 	}
-	
+
 	private static final HandlerList handlers = new HandlerList();
 	public HandlerList getHandlers() {
 	    return handlers;
 	}
-	 
+
 	public static HandlerList getHandlerList() {
 	    return handlers;
 	}

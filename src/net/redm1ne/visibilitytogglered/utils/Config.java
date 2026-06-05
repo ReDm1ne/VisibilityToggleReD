@@ -1,4 +1,4 @@
-package dev.cleusgamer201.visibilitytoggle.utils;
+package net.redm1ne.visibilitytogglered.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,14 +6,14 @@ import java.io.IOException;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import dev.cleusgamer201.visibilitytoggle.Main;
-import dev.cleusgamer201.visibilitytoggle.Utils;
+import net.redm1ne.visibilitytogglered.Main;
+import net.redm1ne.visibilitytogglered.Utils;
 
 public class Config extends YamlConfiguration {
 
     private final File file;
     private final String path;
-	
+
 	public Config(String path) {
 		this.path = (path + ".yml");
 		this.file = new File(Main.getInstance().getDataFolder(), this.path);

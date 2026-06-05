@@ -3,7 +3,7 @@
 ##      >>> VisibilityToggle <<<     ##
 ##    @Developed By CleusGamer201    ##
 #######################################
-Prefix: '&bVisbility&7<13> &r'
+Prefix: '&bVisibility&7<13> &r'
 MySQL:
   Enabled: false
   Host: 127.0.0.1
@@ -33,38 +33,35 @@ Settings:
   - World
 
 Messages:
-  Show: '&7¡Showing all players!'
-  Rank: '&7¡Showing only players with rank'
-  Hide: '&7¡All players hided!'
+  Show: '&7Showing all players!'
+  Rank: '&7Showing only players with rank'
+  Hide: '&7All players hidden!'
   Delay: '&eWait &7{cooldown}s &eto use again!'
 
 Titles:
   Show:
     Title: '&aPLAYERS ON'
-    Subtitle: '&7¡now all players are visible!'
+    Subtitle: '&7now all players are visible!'
   Rank:
     Title: '&dONLY RANK'
-    Subtitle: '&7¡only players with rank will be show!'
+    Subtitle: '&7only players with rank will be shown!'
   Hide:
     Title: '&cPLAYERS OFF'
-    Subtitle: '&7¡now all players are invisible!'
+    Subtitle: '&7now all players are invisible!'
 
 Items:
   Show:
     Name: '&bPlayers&7> &aOn &7(Right Click)'
-    Item: INK_SACK
-    Data: 10
-    Lore: 
+    Item: LIME_DYE
+    Lore:
     - '&7Right Click To &eToggle'
   Rank:
     Name: '&bPlayers&7> &dRank Only &7(Right Click)'
-    Item: INK_SACK
-    Data: 9
-    Lore: 
+    Item: PINK_DYE
+    Lore:
     - '&7Right Click To &eToggle'
   Hide:
     Name: '&bPlayers&7> &cOff &7(Right Click)'
-    Item: INK_SACK
-    Data: 8
-    Lore: 
+    Item: GRAY_DYE
+    Lore:
     - '&7Right Click To &eToggle'

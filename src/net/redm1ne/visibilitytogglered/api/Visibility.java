@@ -1,4 +1,4 @@
-package dev.cleusgamer201.visibilitytoggle.api;
+package net.redm1ne.visibilitytogglered.api;
 
 public enum Visibility {
 
